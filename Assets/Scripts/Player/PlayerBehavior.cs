@@ -26,6 +26,14 @@ public class PlayerBehavior : MonoBehaviour
         transform.Translate(moveDirection, 0,0);
         //Vector2 vectorMoveDirection = new Vector2(moveDirection, transform.position.y);
         //rigidbodyPlayer.linearVelocity = vectorMoveDirection * moveSpeed;
+        if (moveDirection < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else if (moveDirection > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1); 
+        }
     }
 
     private void HandleJump()
