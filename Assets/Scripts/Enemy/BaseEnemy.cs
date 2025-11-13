@@ -7,8 +7,10 @@ public abstract class BaseEnemy : MonoBehaviour
     protected Animator animator;
     protected Health health;
     protected bool canAttack = true;
-    protected void Awake()
+    protected AudioSource audioSource;
+    protected virtual void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
 

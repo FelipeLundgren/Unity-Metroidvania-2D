@@ -15,13 +15,18 @@ public class PlayerBehavior : MonoBehaviour
     private Rigidbody2D rigidbodyPlayer;
     private isGroundChecker isGroundChecker;
     private float moveDirection;
+    private Health health;
 
     private void Awake()
     {
-        GetComponent<Health>().OnDead += HandlePlayerDeath;
+        health = GetComponent<Health>();
         rigidbodyPlayer = GetComponent<Rigidbody2D>();
         isGroundChecker = GetComponent<isGroundChecker>();
+        health.OnDead += HandlePlayerDeath;
+        health.OnHurt += PlayHurtSound;
     }
+
+    
 
     private void Start()
     {
@@ -53,6 +58,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (isGroundChecker.isGrounded() == false)
             return;
+        GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerJump);
         rigidbodyPlayer.linearVelocity += Vector2.up * jumpForce;
     }
 
@@ -61,10 +67,12 @@ public class PlayerBehavior : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
         rigidbodyPlayer.constraints = RigidbodyConstraints2D.FreezeAll;
         GameManager.Instance.InputManager.DisablePlayerInput();
+        GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerDeath);
     }
 
     private void Attack()
     {
+        GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerAttack);
         Collider2D[] hittedEnemies = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, attackLayer);
         print("Making enemy take damage");
         print(hittedEnemies.Length);
@@ -78,6 +86,16 @@ public class PlayerBehavior : MonoBehaviour
                 enemyHealth.TakeDamage();
             }
         }
+    }
+
+    private void PlayHurtSound()
+    {
+        GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerHurt);
+    }
+
+    private void PlayWalkSound()
+    {
+        GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerWalk);
     }
     private void OnDrawGizmos()
     {
