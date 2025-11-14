@@ -6,9 +6,8 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private float jumpForce = 5;
     [SerializeField] private float moveSpeed = 5;
 
-    [Header("Propriedades de ataque")] [SerializeField]
-    private float attackRange = 1f;
-
+    [Header("Propriedades de ataque")]
+    [SerializeField] private float attackRange = 1f;
     [SerializeField] private Transform attackPosition;
     [SerializeField] private LayerMask attackLayer;
 
@@ -20,17 +19,17 @@ public class PlayerBehavior : MonoBehaviour
     private void Awake()
     {
         health = GetComponent<Health>();
+        UpdateLives(health.GetLives());
         rigidbodyPlayer = GetComponent<Rigidbody2D>();
         isGroundChecker = GetComponent<isGroundChecker>();
         health.OnDead += HandlePlayerDeath;
-        health.OnHurt += PlayHurtSound;
+        health.OnHurt += HandleHurt; 
     }
-
-    
 
     private void Start()
     {
         GameManager.Instance.InputManager.onJump += HandleJump;
+        
     }
 
     private void Update()
@@ -53,7 +52,6 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
-
     private void HandleJump()
     {
         if (isGroundChecker.isGrounded() == false)
@@ -64,6 +62,7 @@ public class PlayerBehavior : MonoBehaviour
 
     private void HandlePlayerDeath()
     {
+        UpdateLives(health.GetLives());
         GetComponent<Collider2D>().enabled = false;
         rigidbodyPlayer.constraints = RigidbodyConstraints2D.FreezeAll;
         GameManager.Instance.InputManager.DisablePlayerInput();
@@ -74,32 +73,35 @@ public class PlayerBehavior : MonoBehaviour
     {
         GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerAttack);
         Collider2D[] hittedEnemies = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, attackLayer);
-        print("Making enemy take damage");
-        print(hittedEnemies.Length);
 
         foreach (Collider2D hittedEnemy in hittedEnemies)
         {
-            print("Checking enemy");
             if (hittedEnemy.TryGetComponent(out Health enemyHealth))
             {
-                print("Getting damage");
                 enemyHealth.TakeDamage();
             }
         }
     }
 
-    private void PlayHurtSound()
+    private void HandleHurt() 
     {
         GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerHurt);
+        UpdateLives(health.GetLives());
     }
 
     private void PlayWalkSound()
     {
         GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerWalk);
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(attackPosition.position, attackRange);
+    }
+
+    private void UpdateLives(int amount)
+    {
+        GameManager.Instance.UpdateLives(amount);
     }
 }

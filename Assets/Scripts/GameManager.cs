@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
 
     private int totalKeys;
     private int keysLeftToCollect;
+    
+    [Header("Managers")]
+    public UIManager UIManager;
 
     [Header("Dynamic Game Objects")] 
     [SerializeField] private GameObject bossDoor;
@@ -18,16 +21,20 @@ public class GameManager : MonoBehaviour
         if (Instance != null) Destroy(this.gameObject);
         Instance = this;
         InputManager = new InputManager();
-
+        
         totalKeys = FindObjectsOfType<CollectableKey>().Length;
         keysLeftToCollect = totalKeys;
-        print(totalKeys);
+        UIManager.UpdateKeysLeftTexty(totalKeys,-keysLeftToCollect+totalKeys);
+        
     }
 
     public void UpdateKeysLeft()
     {
         keysLeftToCollect--;
+        
+        UIManager.UpdateKeysLeftTexty(totalKeys,-keysLeftToCollect+totalKeys);
         CheckAllKeysCollected();
+        
     }
 
     private void CheckAllKeysCollected()
@@ -36,5 +43,9 @@ public class GameManager : MonoBehaviour
         {
             Destroy(bossDoor);
         }
+    }
+    public void UpdateLives(int amount)
+    {
+        UIManager.UpdateLivesText(amount);
     }
 }
