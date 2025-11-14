@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
         
         totalKeys = FindObjectsOfType<CollectableKey>().Length;
         keysLeftToCollect = totalKeys;
+        
         UIManager.UpdateKeysLeftTexty(totalKeys,-keysLeftToCollect+totalKeys);
         
     }

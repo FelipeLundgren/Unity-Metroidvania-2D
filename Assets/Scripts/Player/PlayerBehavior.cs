@@ -10,15 +10,16 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private float attackRange = 1f;
     [SerializeField] private Transform attackPosition;
     [SerializeField] private LayerMask attackLayer;
+    
+    [SerializeField] private ParticleSystem hitParticle;
 
     private Rigidbody2D rigidbodyPlayer;
     private isGroundChecker isGroundChecker;
     private float moveDirection;
-    private Health health;
+    [SerializeField] private Health health;
 
     private void Awake()
     {
-        health = GetComponent<Health>();
         UpdateLives(health.GetLives());
         rigidbodyPlayer = GetComponent<Rigidbody2D>();
         isGroundChecker = GetComponent<isGroundChecker>();
@@ -63,10 +64,12 @@ public class PlayerBehavior : MonoBehaviour
     private void HandlePlayerDeath()
     {
         UpdateLives(health.GetLives());
+        PlayHitParticle();
         GetComponent<Collider2D>().enabled = false;
         rigidbodyPlayer.constraints = RigidbodyConstraints2D.FreezeAll;
         GameManager.Instance.InputManager.DisablePlayerInput();
         GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerDeath);
+        
     }
 
     private void Attack()
@@ -86,6 +89,7 @@ public class PlayerBehavior : MonoBehaviour
     private void HandleHurt() 
     {
         GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerHurt);
+        PlayHitParticle();
         UpdateLives(health.GetLives());
     }
 
@@ -103,5 +107,11 @@ public class PlayerBehavior : MonoBehaviour
     private void UpdateLives(int amount)
     {
         GameManager.Instance.UpdateLives(amount);
+    }
+    
+    private void PlayHitParticle()
+    {
+        ParticleSystem instantiatedParticle = Instantiate(hitParticle, transform.position, transform.rotation);
+        instantiatedParticle.Play();
     }
 }
