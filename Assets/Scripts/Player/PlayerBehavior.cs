@@ -33,16 +33,18 @@ public class PlayerBehavior : MonoBehaviour
         
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         MovePlayer();
     }
 
     private void MovePlayer()
     {
-        float moveDirection = GameManager.Instance.InputManager.Movement * Time.deltaTime * moveSpeed;
-
-        transform.Translate(moveDirection, 0, 0);
+        float moveDirection = GameManager.Instance.InputManager.Movement;
+        Vector2 directionToMove = new Vector2(moveDirection * moveSpeed, rigidbodyPlayer.linearVelocity.y );
+        rigidbodyPlayer.linearVelocity = directionToMove;
+        
+        
         if (moveDirection < 0)
         {
             transform.localScale = new Vector3(-1, 1, 1);
