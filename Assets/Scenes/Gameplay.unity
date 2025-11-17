@@ -5301,6 +5301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   KeysText: {fileID: 542148360}
   livesText: {fileID: 1636987091}
+  victoryText: {fileID: 1705645535}
   GameOverPanel: {fileID: 414283707}
 --- !u!1 &1918835699
 GameObject:

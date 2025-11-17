@@ -59,6 +59,13 @@ public class GameManager : MonoBehaviour
 
     private void HandleGameOver()
     {
+        StartCoroutine(WaitPanel());
+        
+    }
+
+    private IEnumerator WaitPanel()
+    {
+        yield return new WaitForSeconds(2f);
         UIManager.OpenGameOverPanel();
     }
 

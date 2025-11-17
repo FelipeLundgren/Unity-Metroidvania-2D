@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 336943658}
   - component: {fileID: 336943657}
   - component: {fileID: 336943656}
+  - component: {fileID: 336943659}
   m_Layer: 5
   m_Name: Creditos
   m_TagString: Untagged
@@ -285,6 +286,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 336943654}
   m_CullTransparentMesh: 1
+--- !u!114 &336943659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336943654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b4593ab362fbad448b0b4e98e8b5679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CreditsBehavior
 --- !u!1 &511595647
 GameObject:
   m_ObjectHideFlags: 0
