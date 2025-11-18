@@ -534,7 +534,7 @@ Transform:
   m_GameObject: {fileID: 138569396}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.23, y: 0.099999994, z: -10}
+  m_LocalPosition: {x: 40.06, y: 3.84, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -784,6 +784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossBehavior
   moveSpeed: 2
   attackDistance: 2
+  hitParticle: {fileID: 1141330259687333425, guid: 47d79a895e70175408f00cbddc7a49ce, type: 3}
   attackRange: 1
   attackOffset: {x: 1, y: -0.5, z: 0}
   attackMask:
@@ -840,35 +841,14 @@ GameObject:
   m_Component:
   - component: {fileID: 266203862}
   - component: {fileID: 266203861}
-  - component: {fileID: 266203860}
+  - component: {fileID: 266203863}
   m_Layer: 0
   m_Name: blueJewel
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &266203860
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 266203859}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.24, y: 0.22, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &266203861
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -942,6 +922,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &266203863
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266203859}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.24, y: 0.22}
+    newSize: {x: 0.24, y: 0.22}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.24, y: 0.22}
+  m_EdgeRadius: 0
 --- !u!1 &397168373
 GameObject:
   m_ObjectHideFlags: 0
@@ -6285,7 +6311,7 @@ Transform:
   m_GameObject: {fileID: 2035985600}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.23, y: -0.4, z: 0}
+  m_LocalPosition: {x: 40.06, y: 3.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6305,8 +6331,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2801dac42c7b10041826eae8801df98c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  jumpForce: 8
-  moveSpeed: 10
+  jumpForce: 5
+  moveSpeed: 5
   attackRange: 0.5
   attackPosition: {fileID: 729130051}
   attackLayer:

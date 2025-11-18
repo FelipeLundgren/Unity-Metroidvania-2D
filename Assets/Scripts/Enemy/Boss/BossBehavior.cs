@@ -10,6 +10,7 @@ public class BossBehavior : MonoBehaviour
 
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float attackDistance = 1f;
+    [SerializeField] private ParticleSystem hitParticle;
 
 
     [Header("Attack properties")] [SerializeField]
@@ -112,10 +113,17 @@ public class BossBehavior : MonoBehaviour
     private void PlayHurtAnim()
     {
         animator.SetTrigger("hurt");
+        PlayHitParticle();
     }
 
     private void HandleDeath()
     {
         animator.SetTrigger("dead");
+        PlayHitParticle();
+    }
+    private void PlayHitParticle()
+    {
+        ParticleSystem instantiatedParticle = Instantiate(hitParticle, transform.position, transform.rotation);
+        instantiatedParticle.Play();
     }
 }

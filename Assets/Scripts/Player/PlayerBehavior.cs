@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour
 {
-    [SerializeField] private float jumpForce = 5;
+    [SerializeField] private float jumpForce = 2.5f;
     [SerializeField] private float moveSpeed = 5;
 
     [Header("Propriedades de ataque")]
@@ -16,6 +16,7 @@ public class PlayerBehavior : MonoBehaviour
     private Rigidbody2D rigidbodyPlayer;
     private isGroundChecker isGroundChecker;
     private float moveDirection;
+    private bool hasPowerUp = false;
     [SerializeField] private Health health;
 
     private void Awake()
@@ -57,10 +58,16 @@ public class PlayerBehavior : MonoBehaviour
 
     private void HandleJump()
     {
+        float powerJumpForce = jumpForce;
+        if (hasPowerUp)
+        {
+            powerJumpForce*= 1.5f;
+        }
+        
         if (isGroundChecker.isGrounded() == false)
             return;
         GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerJump);
-        rigidbodyPlayer.linearVelocity += Vector2.up * jumpForce;
+        rigidbodyPlayer.linearVelocity += Vector2.up * powerJumpForce;
     }
 
     private void HandlePlayerDeath()
@@ -116,4 +123,17 @@ public class PlayerBehavior : MonoBehaviour
         ParticleSystem instantiatedParticle = Instantiate(hitParticle, transform.position, transform.rotation);
         instantiatedParticle.Play();
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("PowerUp"))
+        {
+            hasPowerUp = true;
+            Destroy(other.gameObject);
+            
+        }
+    }
+    
+
+
 }
