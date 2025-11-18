@@ -124,16 +124,13 @@ public class PlayerBehavior : MonoBehaviour
         instantiatedParticle.Play();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void PowerUpCollected(string text)
     {
-        if (other.CompareTag("PowerUp"))
-        {
-            hasPowerUp = true;
-            Destroy(other.gameObject);
-            
-        }
+        hasPowerUp = true;
+        GameManager.Instance.SetPowerUpText(text);
+
     }
-    
+
 
 
 }

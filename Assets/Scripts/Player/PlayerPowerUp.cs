@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class PlayerPowerUp : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private string powerup = "Hyper Jump enable";
+    private void OnTriggerEnter2D(Collider2D other)
     {
         
+        if (other.CompareTag("Player"))
+        {
+            other.GetComponent<PlayerBehavior>().PowerUpCollected(powerup);
+            Destroy(this.gameObject);
+
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+ 
 }

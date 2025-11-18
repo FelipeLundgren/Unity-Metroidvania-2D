@@ -118,6 +118,7 @@ public class BossBehavior : MonoBehaviour
 
     private void HandleDeath()
     {
+        GetComponent<BoxCollider2D>().enabled = false;
         animator.SetTrigger("dead");
         PlayHitParticle();
     }

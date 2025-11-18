@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -7,7 +8,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI KeysText;
     [SerializeField] private TextMeshProUGUI livesText;
     [SerializeField] private TextMeshProUGUI victoryText;
-    
+    [Header("PowerUpText")]
+    [SerializeField] private TextMeshProUGUI powerUpText;
+
     [Header("Panels")]
     [SerializeField] private GameObject GameOverPanel;
 
@@ -35,5 +38,16 @@ public class UIManager : MonoBehaviour
     public void ShowVictoryText()
     {
         victoryText.gameObject.SetActive(true);
+    }
+    public IEnumerator PowerUpText(string text)
+    {
+
+        powerUpText.text = text;
+        powerUpText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        powerUpText.gameObject.SetActive(false);
+
+
+
     }
 }

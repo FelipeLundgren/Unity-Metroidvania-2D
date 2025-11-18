@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,6 +19,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerBehavior player;
     [SerializeField] private BossBehavior boss;
     [SerializeField] private BossFightTrigger bossFightTrigger;
+
+    
+
 
 
     private void Awake()
@@ -89,5 +93,12 @@ public class GameManager : MonoBehaviour
     public PlayerBehavior GetPlayer()
     {
         return player;
+    }
+
+    public void SetPowerUpText(string text)
+    {
+
+        StartCoroutine(UIManager.PowerUpText(text));
+
     }
 }
