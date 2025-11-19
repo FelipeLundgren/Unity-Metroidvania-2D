@@ -28,7 +28,7 @@ public class MainMenuUI : MonoBehaviour
     private void GoToGameplayScene()
     {
         MainMenuManager.Instance.AudioManager.PlaySFX(SFX.ButtonClick);
-        SceneManager.LoadScene("Gameplay");
+        SceneManager.LoadSceneAsync("Gameplay");
     }
 
     private void ExitGame()

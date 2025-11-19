@@ -5,6 +5,6 @@ public class CreditsBehavior : MonoBehaviour
 {
     private void GoToMenu()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadSceneAsync("Menu");
     }
 }

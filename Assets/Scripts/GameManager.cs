@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator GoToCreditsScene()
     {
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene("Credits");
+        SceneManager.LoadSceneAsync("Credits");
     }
 
     public void UpdateLives(int amount)
