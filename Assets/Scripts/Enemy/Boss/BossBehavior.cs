@@ -13,9 +13,7 @@ public class BossBehavior : MonoBehaviour
     [SerializeField] private ParticleSystem hitParticle;
 
 
-    [Header("Attack properties")] [SerializeField]
-    private float attackRange = 1f;
-
+    [Header("Attack properties")]
     [SerializeField] private Vector3 attackOffset;
     [SerializeField] private LayerMask attackMask;
     [SerializeField] private float attackSize = 1f;

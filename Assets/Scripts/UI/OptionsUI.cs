@@ -22,7 +22,7 @@ public class OptionsUI : MonoBehaviour
         EnvironmentVolumeSlider.SetValueWithoutNotify(MainMenuManager.Instance.AudioManager.GetMixerVolume(MixerGroup.Environment));
     }
 
-    private void ClosePanel()
+    private void ClosePanel()   
     {
         MainMenuManager.Instance.AudioManager.PlaySFX(SFX.ButtonClick);
         this.gameObject.SetActive(false);
