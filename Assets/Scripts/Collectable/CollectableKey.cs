@@ -5,8 +5,12 @@ public class CollectableKey : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collison)
     {
-        GameManager.Instance.UpdateKeysLeft();
-        Destroy(this.gameObject);
+        if (collison.CompareTag("Player"))
+        {
+            GameManager.Instance.UpdateKeysLeft();
+            Destroy(this.gameObject);
+        }
+        
         
     }
 }
