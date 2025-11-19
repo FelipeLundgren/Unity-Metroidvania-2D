@@ -21,19 +21,19 @@ public class MainMenuUI : MonoBehaviour
 
     private void OpenOptionsMenu()
     {
-        GameManager.Instance.AudioManager.PlaySFX(SFX.ButtonClick);
+        MainMenuManager.Instance.AudioManager.PlaySFX(SFX.ButtonClick);
         optionsMenu.SetActive(true);
     }
 
     private void GoToGameplayScene()
     {
-        GameManager.Instance.AudioManager.PlaySFX(SFX.ButtonClick);
+        MainMenuManager.Instance.AudioManager.PlaySFX(SFX.ButtonClick);
         SceneManager.LoadScene("Gameplay");
     }
 
     private void ExitGame()
     {
-        GameManager.Instance.AudioManager.PlaySFX(SFX.ButtonClick);
+        MainMenuManager.Instance.AudioManager.PlaySFX(SFX.ButtonClick);
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else

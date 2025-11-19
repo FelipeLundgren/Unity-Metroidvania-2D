@@ -1,16 +1,33 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static MainMenuManager Instance;
+    public AudioManager AudioManager;
+    public InputManager InputManager { get; private set; }
+    
+    
+
+    
+
+    
+
+
+
+    private void Awake()
     {
+        if (Instance != null) Destroy(this.gameObject);
+        Instance = this;
+        InputManager = new InputManager();
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
+
+    
+
+    
 }

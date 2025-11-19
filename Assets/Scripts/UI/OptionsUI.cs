@@ -17,29 +17,29 @@ public class OptionsUI : MonoBehaviour
         SFXVolumeSlider.onValueChanged.AddListener(OnSFXVolumeSliderChanged);
         EnvironmentVolumeSlider.onValueChanged.AddListener(OnEnvironmentVolumeSliderChanged);
 
-        MasterVolumeSlider.SetValueWithoutNotify(GameManager.Instance.AudioManager.GetMixerVolume(MixerGroup.Master));
-        SFXVolumeSlider.SetValueWithoutNotify(GameManager.Instance.AudioManager.GetMixerVolume(MixerGroup.SFX));
-        EnvironmentVolumeSlider.SetValueWithoutNotify(GameManager.Instance.AudioManager.GetMixerVolume(MixerGroup.Environment));
+        MasterVolumeSlider.SetValueWithoutNotify(MainMenuManager.Instance.AudioManager.GetMixerVolume(MixerGroup.Master));
+        SFXVolumeSlider.SetValueWithoutNotify(MainMenuManager.Instance.AudioManager.GetMixerVolume(MixerGroup.SFX));
+        EnvironmentVolumeSlider.SetValueWithoutNotify(MainMenuManager.Instance.AudioManager.GetMixerVolume(MixerGroup.Environment));
     }
 
     private void ClosePanel()
     {
-        GameManager.Instance.AudioManager.PlaySFX(SFX.ButtonClick);
+        MainMenuManager.Instance.AudioManager.PlaySFX(SFX.ButtonClick);
         this.gameObject.SetActive(false);
     }
 
     private void OnMasterVolumeSliderChanged(float value)
     {
-        GameManager.Instance.AudioManager.SetMixerVolume(MixerGroup.Master, value);
+        MainMenuManager.Instance.AudioManager.SetMixerVolume(MixerGroup.Master, value);
     }
 
     private void OnSFXVolumeSliderChanged(float value)
     {
-        GameManager.Instance.AudioManager.SetMixerVolume(MixerGroup.SFX, value);
+        MainMenuManager.Instance.AudioManager.SetMixerVolume(MixerGroup.SFX, value);
     }
 
     private void OnEnvironmentVolumeSliderChanged(float value)
     { 
-        GameManager.Instance.AudioManager.SetMixerVolume(MixerGroup.Environment, value);
+        MainMenuManager.Instance.AudioManager.SetMixerVolume(MixerGroup.Environment, value);
     }
 }
