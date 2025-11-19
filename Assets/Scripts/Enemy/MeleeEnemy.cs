@@ -1,7 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MeleeEnemy : BaseEnemy
 {
+    [SerializeField] private Rigidbody2D enemyRb;
+    [SerializeField] private int speed;
+    [SerializeField] private int direction = 1;
     [Header("Attack properties")]
     [SerializeField] private Transform detectPosition;
     [SerializeField] private Vector2 detectBoxSize;
@@ -16,11 +20,13 @@ public class MeleeEnemy : BaseEnemy
         base.Awake();
         base.health.OnHurt += PlayHurtAudio;
         base.health.OnDead += PlayDeadAudio;
+        enemyRb =  GetComponent<Rigidbody2D>();
     }
     protected override void Update()
     {
         VerifyCanAttack();
         cooldownTimer += Time.deltaTime;
+        Patroll();
     } 
 
     private void VerifyCanAttack()
@@ -74,4 +80,26 @@ public class MeleeEnemy : BaseEnemy
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(detectPosition.position, detectBoxSize);
     }
+
+    private void Patroll()
+    {
+        if (direction > 0)
+        {
+            enemyRb.linearVelocity = Vector2.left * speed; 
+        }
+        else
+        {
+            enemyRb.linearVelocity = Vector2.right * speed;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Wall"))
+        {
+            direction *= -1;
+            transform.localScale = new Vector3(direction, 1, 1);
+        }
+    }
+    
 }
