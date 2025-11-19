@@ -4,7 +4,7 @@ using UnityEngine;
 public class MeleeEnemy : BaseEnemy
 {
     [SerializeField] private Rigidbody2D enemyRb;
-    [SerializeField] private int speed;
+    
     [SerializeField] private int direction = 1;
     [Header("Attack properties")]
     [SerializeField] private Transform detectPosition;
@@ -98,8 +98,9 @@ public class MeleeEnemy : BaseEnemy
         if (other.CompareTag("Wall"))
         {
             direction *= -1;
-            transform.localScale = new Vector3(direction, 1, 1);
+            transform.localScale = new Vector3(direction*-1, 1, 1);
         }
     }
+    
     
 }

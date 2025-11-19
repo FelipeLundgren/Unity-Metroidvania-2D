@@ -8,6 +8,7 @@ public abstract class BaseEnemy : MonoBehaviour
     protected Health health;
     [SerializeField] private ParticleSystem hitParticle;
     protected bool canAttack = true;
+    [SerializeField] public int speed = 1;
     protected AudioSource audioSource;
     protected virtual void Awake()
     {
@@ -29,6 +30,7 @@ public abstract class BaseEnemy : MonoBehaviour
 
     private void HandleDeath()
     {
+        speed = 0;
         canAttack = false;
         GetComponent<BoxCollider2D>().enabled = false;
         animator.SetTrigger("dead");
@@ -47,6 +49,9 @@ public abstract class BaseEnemy : MonoBehaviour
         ParticleSystem instantiatedParticle = Instantiate(hitParticle, transform.position, transform.rotation);
         instantiatedParticle.Play();
     }
+
+    
+        
     
     
     
