@@ -16,11 +16,11 @@ public class GameOverUI : MonoBehaviour
     private void GoToMenu()
     {
         
-        SceneManager.LoadScene("Menu");
+        LoadScene.Instance.StartLoad("Menu");
     }
 
     private void RestartGame()
     {
-        SceneManager.LoadScene("Gameplay");
+        LoadScene.Instance.StartLoad("Gameplay");
     }
 }
