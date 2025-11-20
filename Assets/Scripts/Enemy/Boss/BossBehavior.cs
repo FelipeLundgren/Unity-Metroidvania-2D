@@ -21,15 +21,22 @@ public class BossBehavior : MonoBehaviour
 
     private bool canAttack = false;
     private bool isFlipped = true;
-
+    
+    
+    [SerializeField] private AudioClip[] audioClips;
+    private AudioSource audioSource;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
+        audioSource = GetComponent<AudioSource>();
 
         health.OnHurt += PlayHurtAnim;
         health.OnDead += HandleDeath;
+        health.OnHurt += PlayHurtAudio;
+        health.OnDead += PlayDeadAudio;
+        
     }
 
     private void Start()
@@ -84,6 +91,8 @@ public class BossBehavior : MonoBehaviour
         attackPosition = transform.position;
         attackPosition += transform.right * attackOffset.x;
         attackPosition += transform.up * attackOffset.y;
+        audioSource.clip = audioClips[0];
+        audioSource.Play();
 
         Collider2D collisionInfo = Physics2D.OverlapCircle(attackPosition, attackSize, attackMask);
         if (collisionInfo != null)
@@ -110,12 +119,15 @@ public class BossBehavior : MonoBehaviour
 
     private void PlayHurtAnim()
     {
+        audioSource.Play();
         animator.SetTrigger("hurt");
         PlayHitParticle();
     }
 
     private void HandleDeath()
     {
+        //audioSource.clip = audioClips[2];
+        //audioSource.Play();
         GetComponent<BoxCollider2D>().enabled = false;
         animator.SetTrigger("dead");
         PlayHitParticle();
@@ -125,4 +137,17 @@ public class BossBehavior : MonoBehaviour
         ParticleSystem instantiatedParticle = Instantiate(hitParticle, transform.position, transform.rotation);
         instantiatedParticle.Play();
     }
+    
+    private void PlayHurtAudio()
+    {
+        audioSource.clip = audioClips[1];
+        audioSource.Play();
+    }
+
+    private void PlayDeadAudio()
+    {
+        audioSource.clip = audioClips[2];
+        audioSource.Play();
+    }
+    
 }
